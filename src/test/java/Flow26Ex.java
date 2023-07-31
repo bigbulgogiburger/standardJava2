@@ -23,7 +23,22 @@ public class Flow26Ex {
         }
 
         System.out.println("sum = " + sum);
+    }
 
+    @Test
+    void FlowEx29_369(){
+        for(int i = 1; i<=333; i++){
 
+            String a ="";
+            int value = i;
+            do{
+                if((value%10)%3==0&&(value%10)!=0){
+                    a+="짝";
+                }
+                value /= 10;
+
+            }while(value!=0);
+            System.out.println("i = "+i+", " + a);
+        }
     }
 }
