@@ -97,4 +97,11 @@ public class Chap07 {
         Block block = new Block();
     }
 
+    @Test
+    void cardGame(){
+        Deck deck = new Deck();
+        Card pick = deck.pick();
+        System.out.println("pick = " + pick);
+    }
+
 }
