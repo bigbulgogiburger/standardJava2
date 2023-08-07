@@ -18,4 +18,5 @@ public class Chap09 {
         System.out.println("(point2.a== point1.a) = " + (point2.a== point1.a));
 
     }
+
 }
