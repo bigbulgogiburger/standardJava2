@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class chap10 {
 
@@ -86,4 +87,171 @@ public class chap10 {
         System.out.println("list2 = " + list2);
         System.out.println();
     }
+
+
+    @Test
+    void ArrayListLinkedListTest(){
+        ArrayList al = new ArrayList(2000000);
+        LinkedList ll = new LinkedList();
+
+        System.out.println("===순차적으로 추가하기===");
+        System.out.println("ArrayList: "+add1(al));
+        System.out.println("LinkedList: "+add1(ll));
+        System.out.println("===중간에 추가하기===");
+        System.out.println("ArrayList: "+add2(al));
+        System.out.println("LinkedList: "+add2(ll));
+
+        System.out.println("===중간에 삭제하기===");
+        System.out.println("ArrayList: "+remove2(al));
+        System.out.println("LinkedList: "+remove2(ll));
+
+
+        System.out.println("===순차적으로 삭제하기===");
+        System.out.println("ArrayList: "+remove1(al));
+        System.out.println("LinkedList: "+remove1(ll));
+
+
+    }
+
+    @Test
+    void 접근시간테스트(){
+        ArrayList al = new ArrayList(2000000);
+        LinkedList ll = new LinkedList();
+        add1(al);
+        add1(ll);
+        System.out.println("===접근시간 테스트===");
+        System.out.println("ArrayList: "+access(al));
+        System.out.println("LinkedList: "+access(ll));
+
+    }
+
+    @Test
+    void ArrayListTest() {
+        ArrayList<Integer> al = new ArrayList<>(200000);
+        LinkedList<Integer> ll = new LinkedList<>();
+        al.add(1);
+        al.add(2);
+        al.add(3);
+        ll.add(1);
+        ll.add(2);
+        ll.add(3);
+
+        for (int i = 0; i < al.size(); i++) {
+            System.out.println("al.get("+i+") = " + al.get(i));
+        }
+
+        for (int i = 0; i < ll.size(); i++) {
+            System.out.println("ll.get("+i+") = " + ll.get(i));
+        }
+
+
+        for (int i = 0; i < ll.size(); i++) {
+            System.out.println("ll.pop = " + ll.pop());
+        }
+
+    }
+
+    long access(List list){
+        long start = System.currentTimeMillis();
+        for(int i = 0; i<10000; i++) list.get(i);
+
+        long end = System.currentTimeMillis();
+        return end-start;
+    }
+
+
+    long add1(List list){
+        long start = System.currentTimeMillis();
+        for(int i = 0; i<10000; i++) list.add(i+"");
+
+        long end = System.currentTimeMillis();
+        return end-start;
+    }
+
+    long add2(List list){
+        long start = System.currentTimeMillis();
+        for(int i = 0; i<10000; i++) list.add(500,"X");
+
+        long end = System.currentTimeMillis();
+        return end-start;
+    }
+
+    long remove1(List list){
+        long start = System.currentTimeMillis();
+        for(int i = list.size()-1; i>=0; i--) list.remove(i);
+
+        long end = System.currentTimeMillis();
+        return end-start;
+    }
+
+
+    long remove2(List list){
+        long start = System.currentTimeMillis();
+        for(int i = 0; i<10000; i++) list.remove(i);
+
+        long end = System.currentTimeMillis();
+        return end-start;
+    }
+
+
+    @Test
+    void StackQueueTest(){
+        Stack st = new Stack();
+        Queue q = new LinkedList();
+
+        st.push("1");
+        st.push("2");
+        st.push("3");
+
+        q.offer("0");
+        q.offer("1");
+        q.offer("2");
+
+
+        System.out.println("===stack===");
+        while(!st.isEmpty()){
+            System.out.println("st.pop() = " + st.pop());
+        }
+
+        System.out.println("===queue===");
+        while(!q.isEmpty()){
+            System.out.println("q.poll() = " + q.poll());
+        }
+
+
+    }
+
+
+    @Test
+    void ArrayListTestTest(){
+        ArrayList<String> a = new ArrayList<>();
+
+        for(long i =0; i<5000000L; i++){
+            if(i%10 == 0){
+                a.add("황인규");
+            } else {
+                a.add("편도훈");
+            }
+        }
+
+        long start = System.currentTimeMillis();
+
+        a.forEach(x-> {
+            x.equals("황인규");
+
+        });
+
+        long end = System.currentTimeMillis();
+
+
+        System.out.println("foreach = " + (end-start));
+
+        start =System.currentTimeMillis();
+        a.stream().map(x -> x.equals("황인규"));
+
+        end = System.currentTimeMillis();
+        System.out.println("stream map = " + (end-start));
+    }
+
+
 }
