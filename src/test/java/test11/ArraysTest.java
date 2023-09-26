@@ -3,6 +3,7 @@ package test11;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class ArraysTest {
@@ -10,8 +11,16 @@ public class ArraysTest {
 
     @Test
     void ArrayTest(){
-        List<Integer> integers = Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6});
-        integers.add(11);
+
+        HashSet m = new HashSet<>();
+
+        for(int i = 0; i<17 ; i++){
+            m.add(i);
+            m.add(i+1005);
+            m.add(i+99999);
+        }
+
+        System.out.println(m);
 
     }
 }
